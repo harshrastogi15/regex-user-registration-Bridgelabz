@@ -12,6 +12,8 @@ public class NameValidation {
         System.out.println(flag2);
         boolean flag3 = phoneValidationRegex("9 1410258369");
         System.out.println(flag3);
+        boolean flag4 = passwordValidationRegex("abcdabcdA2");
+        System.out.println(flag4);
     }
 
     public static boolean nameValidationRegex(String st){
@@ -47,4 +49,17 @@ public class NameValidation {
         Matcher matcher = pattern.matcher(number);
         return matcher.matches();
     }
+
+    /*
+    * UC-5
+    * Password Validation
+    */
+
+    public static boolean passwordValidationRegex(String pwd){
+        String regex = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_+=])[a-zA-Z0-9!@#$%^&*()-_+=]{8,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(pwd);
+        return matcher.matches();
+    }
+
 }
