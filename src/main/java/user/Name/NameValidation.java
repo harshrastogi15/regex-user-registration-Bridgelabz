@@ -10,6 +10,8 @@ public class NameValidation {
         System.out.println(flag);
         boolean flag2 = emailValidationRegex("Abb.xyzm.com");
         System.out.println(flag2);
+        boolean flag3 = phoneValidationRegex("9 1410258369");
+        System.out.println(flag3);
     }
 
     public static boolean nameValidationRegex(String st){
@@ -33,4 +35,16 @@ public class NameValidation {
         return matcher.matches();
     }
 
+    /*
+     * UC - 4
+     * As a User need to follow pre-defined
+     * Mobile Format - E.g. 91 9919819801
+     * Country code follow by space and 10-digit number
+     */
+    public static boolean phoneValidationRegex(String number){
+        String regex = "^[0-9]+ [0-9]{10}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(number);
+        return matcher.matches();
+    }
 }
