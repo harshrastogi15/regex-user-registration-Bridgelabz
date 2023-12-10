@@ -3,7 +3,7 @@ package user.Name;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NameValidation {
+public class UserValidation {
     public static void main(String[] args){
         System.out.println("Function for Validation");
         boolean flag = nameValidationRegex("Abb");
@@ -15,6 +15,8 @@ public class NameValidation {
         boolean flag4 = passwordValidationRegex("abcdabcdA2");
         System.out.println(flag4);
     }
+
+
 
 
     public static boolean nameValidationRegex(String st){
@@ -63,4 +65,7 @@ public class NameValidation {
         return matcher.matches();
     }
 
+    public boolean validateUser(String firstname, String lastname, String email, String phone, String password) {
+        return nameValidationRegex(firstname) && nameValidationRegex(lastname) && emailValidationRegex(email) && phoneValidationRegex(phone) && passwordValidationRegex(password);
+    }
 }

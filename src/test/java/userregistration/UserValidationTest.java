@@ -2,7 +2,7 @@ package userregistration;
 
 import org.junit.Assert;
 import org.junit.Test;
-import user.Name.NameValidation;
+import user.Name.UserValidation;
 
 public class UserValidationTest {
     @Test
@@ -21,7 +21,7 @@ public class UserValidationTest {
 
         for (String s: validEmails) {
             System.out.println(s);
-            Assert.assertTrue(NameValidation.emailValidationRegex(s));
+            Assert.assertTrue(UserValidation.emailValidationRegex(s));
         }
 
     }
@@ -46,7 +46,39 @@ public class UserValidationTest {
         };
         for (String s: invalidEmails) {
             System.out.println(s);
-            Assert.assertFalse(NameValidation.emailValidationRegex(s));
+            Assert.assertFalse(UserValidation.emailValidationRegex(s));
         }
     }
+
+
+    @Test
+    public void testValidateUserHappyCase() {
+        UserValidation UserValidation = new UserValidation();
+
+        // Happy case: Valid entries
+        Assert.assertTrue(UserValidation.validateUser("John", "Doe", "john@example.com", "91 1234567890", "HarshRastogi12$"));
+    }
+
+    @Test
+    public void testValidateUserSadCases() {
+        UserValidation UserValidation = new UserValidation();
+
+        // Sad case: Invalid first name (empty)
+        Assert.assertFalse(UserValidation.validateUser("", "Doe", "john@example.com", "91 1234567890", "HarshRastogi12$"));
+
+        // Sad case: Invalid last name (null)
+        Assert.assertFalse(UserValidation.validateUser("John", "", "john@example.com", "91 1234567890", "HarshRastogi12$"));
+
+        // Sad case: Invalid email format
+        Assert.assertFalse(UserValidation.validateUser("John", "Doe", "invalidEmail", "91 1234567890", "HarshRastogi12$"));
+
+        // Sad case: Invalid mobile number (less than 10 digits)
+        Assert.assertFalse(UserValidation.validateUser("John", "Doe", "john@example.com", "123456", "HarshRastogi12$"));
+
+        // Sad case: Invalid password (less than 8 characters)
+        Assert.assertFalse(UserValidation.validateUser("John", "Doe", "john@example.com", "91 1234567890", "Weak"));
+    }
+
+
+
 }
