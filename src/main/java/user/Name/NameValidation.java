@@ -16,6 +16,7 @@ public class NameValidation {
         System.out.println(flag4);
     }
 
+
     public static boolean nameValidationRegex(String st){
         String regex = "^[A-Z][a-z]{2,}$";
         Pattern pattern = Pattern.compile(regex);
@@ -31,7 +32,7 @@ public class NameValidation {
     * */
 
     public static boolean emailValidationRegex(String st){
-        String regex = "^[a-zA-Z0-9]+(.[a-zA-Z0-9]+)*@[a-zA-Z](.[a-zA-Z]+)+$";
+        String regex = "^[a-zA-Z0-9]+([.+-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+(\\.[a-zA-Z]{2,}){1,2}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(st);
         return matcher.matches();
