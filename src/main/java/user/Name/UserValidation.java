@@ -3,6 +3,7 @@ package user.Name;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class UserValidation {
     public static void main(String[] args){
         System.out.println("Function for Validation");
@@ -68,4 +69,28 @@ public class UserValidation {
     public boolean validateUser(String firstname, String lastname, String email, String phone, String password) {
         return nameValidationRegex(firstname) && nameValidationRegex(lastname) && emailValidationRegex(email) && phoneValidationRegex(phone) && passwordValidationRegex(password);
     }
+
+    public void validateUserWithException(String firstname, String lastname, String email, String phone, String password) throws InvalidUserDetailsException {
+//        return nameValidationRegex(firstname) && nameValidationRegex(lastname) && emailValidationRegex(email) && phoneValidationRegex(phone) && passwordValidationRegex(password);
+        if (!nameValidationRegex(firstname)) {
+            throw new InvalidUserDetailsException("Invalid First Name");
+        }
+        if (!nameValidationRegex(lastname)) {
+            throw new InvalidUserDetailsException("Invalid Last Name");
+        }
+
+        if(!emailValidationRegex(email)){
+            throw new InvalidUserDetailsException("Invalid Email");
+        }
+
+        if(!phoneValidationRegex(phone)){
+            throw new InvalidUserDetailsException("Invalid Phone");
+        }
+
+        if(!passwordValidationRegex(password)){
+            throw new InvalidUserDetailsException("Invalid Password");
+        }
+
+    }
+
 }

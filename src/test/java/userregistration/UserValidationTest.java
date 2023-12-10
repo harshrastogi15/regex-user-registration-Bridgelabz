@@ -2,6 +2,8 @@ package userregistration;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import user.Name.InvalidUserDetailsException;
 import user.Name.UserValidation;
 
 public class UserValidationTest {
@@ -77,6 +79,30 @@ public class UserValidationTest {
 
         // Sad case: Invalid password (less than 8 characters)
         Assert.assertFalse(UserValidation.validateUser("John", "Doe", "john@example.com", "91 1234567890", "Weak"));
+    }
+
+    @Test
+    public void testValidationUserWithCustomException(){
+        try{
+            UserValidation userValidation = new UserValidation();
+            // Sad case: Invalid first name (empty)
+            userValidation.validateUserWithException("", "Doe", "john@example.com", "91 1234567890", "HarshRastogi12$");
+
+            // Sad case: Invalid last name (null)
+            userValidation.validateUserWithException("John", "", "john@example.com", "91 1234567890", "HarshRastogi12$");
+
+            // Sad case: Invalid email format
+            userValidation.validateUserWithException("John", "Doe", "invalidEmail", "91 1234567890", "HarshRastogi12$");
+
+            // Sad case: Invalid mobile number (less than 10 digits)
+            userValidation.validateUserWithException("John", "Doe", "john@example.com", "123456", "HarshRastogi12$");
+
+            // Sad case: Invalid password (less than 8 characters)
+            userValidation.validateUserWithException("John", "Doe", "john@example.com", "91 1234567890", "Weak");
+
+        }catch (InvalidUserDetailsException e){
+            System.out.println(e.getMessage());
+        }
     }
 
 
